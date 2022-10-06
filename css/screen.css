@@ -627,12 +627,24 @@ input::placeholder {
     Class to put on all input="text" like form inputs
 */
 
+.has-error {
+
+    --label-color: var(--global-color-error);
+    --input-color: var(--global-color-error);
+    --input-placeholder-color: var(--global-color-error-transparent);
+    --input-borderColor: var(--global-input-error-borderColor);
+    --input-hover-borderColor: var(--global-input-error-hover-borderColor);
+    --input-focus-borderColor: var(--global-input-error-focus-borderColor);
+    --input-focus-boxShadow: var(--global-input-error-boxShadowColor);
+}
+
 .c-input {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     width: 100%;
-    border: 1px solid var(--global-input-borderColor);
+    border: var(--global-borderWidth) solid var(--input-borderColor, var(--global-input-borderColor));
+    /* border: 1px solid var(--global-input-borderColor); */
     /* border: 1px solid var(--global-color-neutral-xxx-light); */
     border-radius: var(--global-borderRadius);
     background-color: var(--global-input-backgroundColor);
@@ -682,11 +694,33 @@ more padding on the right to avoid overlap
     padding-bottom: var(--global-whitespace-sm);
     font-size: 14px;
     line-height: 16px;
-    color: var(--label-color);
+    color: var(--label-color, var(--global-color-neutral-xx-dark));
+
 }
 
 .c-label--option {
     padding-bottom: 0;
+}
+
+.c-form-field {
+    position: relative;
+}
+
+.c-label--floating {
+    position: absolute;
+    top: 12px;
+    left: 8px;
+    padding: 4px 8px;
+    will-change: transform;
+    transform: translateY( 0 );
+    transition: transform 200ms ease-in-out;
+    box-shadow: 0 0 4px 4px rgba(255,255,255,0.8);
+    background: white;
+}
+
+.c-form-field:focus-within .c-label--floating, 
+.is-floating {
+    transform: translateY(-24px);
 }
 
 /*
@@ -948,6 +982,62 @@ more padding on the right to avoid overlap
     ---
     Password toggle custom checkbox
 */
+
+.c-toggle-password__icon--show{
+    display: none;
+}
+
+
+.c-toggle-password__checkbox:checked + .c-toggle-password__label .c-toggle-password__icon--show  {
+    display: block;
+}
+.c-toggle-password__checkbox:checked + .c-toggle-password__label .c-toggle-password__icon--hide  {
+    display: none;
+}
+
+.c-toggle-password-container {
+    position: relative;
+}
+
+.c-toggle-password {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+
+
+
+.c-toggle-password__icon--show,
+.c-toggle-password__icon--hide {
+    width: 20px;
+    height: 20px;
+    fill: var(--global-color-neutral);
+}
+
+
+/* Hartje */
+.c-heart__icon {
+    width: 45px;
+    height: 45px;
+    fill: var(--global-color-neutral);
+    fill: var(--color-neutral-x-light);
+}
+
+
+
+.c-heart-input:checked + .c-heart-label .c-heart__icon {
+    fill: #D80027;
+    width: 50px;
+    height: 50px;
+    transform: rotate(360deg);
+    transition: all 0.7s ease-in-out;
+}
+
+/* Opzoeken transition easing bounce */
+.c-heart-input:not(:checked) + .c-heart-label .c-heart__icon {
+    transform: rotate(0deg);
+    transition: all 0.7s ease-in-out;
+}
 
 
 /*------------------------------------*\
